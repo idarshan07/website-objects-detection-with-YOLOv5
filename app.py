@@ -4,8 +4,8 @@ from PIL import Image
 import torch
 
 # Load the YOLOv5 model
-model = torch.hub.load(repo_or_dir='ultralytics/yolov5', model='yolov5', path="idarshan07/website-objects-detection-with-YOLOv5/model/best.pt", source="github")
-
+model = torch.hub.load('ultralytics/yolov5', 'custom',
+                       path="model/best.pt")
 # Function to perform object detection
 def detect_objects(image):
     results = model(image)
@@ -18,24 +18,23 @@ def main():
 
 
     uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+    
 
     if uploaded_image is not None:
         image = Image.open(uploaded_image)
-        st.image(image, caption='Uploaded Image.', use_column_width=True)
+        st.image(image, caption="Uploaded Image", use_column_width=True)
 
-        if st.button('Detect Objects'):
-            # Perform object detection
-            results = detect_objects(image)
+        # Perform inference and get results
+        results = model(image)
 
-            # Display the results
-            st.subheader('Detected Objects:')
-            for obj in results.names[1:]:
-                detections = results.pandas().xyxy[results.names.index(obj)]
-                st.write(f"{obj}: {len(detections)}")
-                for index, row in detections.iterrows():
-                    st.write(f"Class: {obj}, Confidence: {row['confidence']:.2f}, "
-                             f"Bounding Box: [{int(row['xmin'])}, {int(row['ymin'])}, "
-                             f"{int(row['xmax'])}, {int(row['ymax'])}]")
+        # Overlay bounding boxes on the image
+        annotated_image = results.render()[0]
+        
+        st.subheader('Image with Detected Objects:')
+
+        st.image(annotated_image, caption="Annotated Image", use_column_width=True)
+
+        
 
 if __name__ == '__main__':
     main()
