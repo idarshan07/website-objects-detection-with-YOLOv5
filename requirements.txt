@@ -1,5 +1,7 @@
 streamlit
 wget
+
+opencv-python
 # YOLOv5 requirements
 # Usage: pip install -r requirements.txt
 
@@ -7,7 +9,6 @@ wget
 gitpython>=3.1.30
 matplotlib>=3.3
 numpy>=1.18.5
-opencv-python>=4.1.1
 Pillow>=7.1.2
 psutil  # system resources
 PyYAML>=5.3.1
@@ -33,7 +34,6 @@ seaborn>=0.11.0
 # nvidia-tensorrt  # TensorRT export
 # scikit-learn<=1.1.2  # CoreML quantization
 # tensorflow>=2.4.0  # TF exports (-cpu, -aarch64, -macos)
-# tensorflowjs>=3.9.0  # TF.js export
 # openvino-dev  # OpenVINO export
 
 # Deploy ----------------------------------------------------------------------
@@ -41,7 +41,6 @@ setuptools>=65.5.1 # Snyk vulnerability fix
 # tritonclient[all]~=2.24.0
 
 # Extras ----------------------------------------------------------------------
-# ipython  # interactive notebook
 # mss  # screenshots
 # albumentations>=1.0.3
 # pycocotools>=2.0.6  # COCO mAP
