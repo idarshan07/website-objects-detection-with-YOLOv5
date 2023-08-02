@@ -4,7 +4,7 @@ from PIL import Image
 import torch
 
 # Load the YOLOv5 model
-model = torch.hub.load('yolov5-master', 'custom', path="model/best.pt", source="local")
+model = torch.hub.load(repo_or_dir='idarshan07/website-objects-detection-with-YOLOv5/', model='/website-objects-detection-with-YOLOv5/yolov5-master', path="model/best.pt", source="local")
 
 # Function to perform object detection
 def detect_objects(image):
